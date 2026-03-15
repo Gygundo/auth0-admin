@@ -1,0 +1,46 @@
+/* Minimal custom styles — Tailwind handles most of the styling */
+
+.user-row {
+  transition: background-color 0.15s;
+}
+
+.user-row:hover {
+  background-color: #f9fafb;
+}
+
+.user-row.active {
+  background-color: #eff6ff;
+  border-color: #3b82f6;
+}
+
+.toast {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.log-type-s {
+  color: #16a34a;
+}
+
+.log-type-f {
+  color: #dc2626;
+}
+
+.log-type-w {
+  color: #d97706;
+}
+
+pre:empty::after {
+  content: '{}';
+  color: #9ca3af;
+}

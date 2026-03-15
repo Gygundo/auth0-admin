@@ -19,7 +19,8 @@ router.get('/search', async (req, res) => {
       include_totals: true,
     });
 
-    res.json(result.data);
+    const { users = [], start, limit, length, total } = result.response;
+    res.json({ users, start, limit, length, total });
   } catch (err) {
     console.error('User search error:', err.message);
     res.status(500).json({ error: err.message });
@@ -29,8 +30,8 @@ router.get('/search', async (req, res) => {
 // Get a single user by ID
 router.get('/:id', async (req, res) => {
   try {
-    const result = await management.users.get({ id: req.params.id });
-    res.json(result.data);
+    const result = await management.users.get(req.params.id);
+    res.json(result);
   } catch (err) {
     console.error('Get user error:', err.message);
     res.status(err.statusCode || 500).json({ error: err.message });
@@ -40,12 +41,11 @@ router.get('/:id', async (req, res) => {
 // Get logs for a specific user
 router.get('/:id/logs', async (req, res) => {
   try {
-    const result = await management.users.logs.list({
-      userId: req.params.id,
+    const result = await management.users.logs.list(req.params.id, {
       per_page: 50,
       sort: 'date:-1',
     });
-    res.json(result.data);
+    res.json(result);
   } catch (err) {
     console.error('User logs error:', err.message);
     res.status(500).json({ error: err.message });
@@ -55,7 +55,7 @@ router.get('/:id/logs', async (req, res) => {
 // Delete a user
 router.delete('/:id', async (req, res) => {
   try {
-    await management.users.delete({ id: req.params.id });
+    await management.users.delete(req.params.id);
     res.json({ message: 'User deleted successfully' });
   } catch (err) {
     console.error('Delete user error:', err.message);

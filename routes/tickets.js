@@ -17,7 +17,7 @@ router.post('/password-reset', async (req, res) => {
       mark_email_as_verified: true,
     });
 
-    res.json({ message: 'Password reset email sent', ticket: result.data });
+    res.json({ message: 'Password reset email sent', ticket: result });
   } catch (err) {
     console.error('Password reset error:', err.message);
     res.status(err.statusCode || 500).json({ error: err.message });
@@ -36,7 +36,7 @@ router.post('/verify-email', async (req, res) => {
       user_id,
     });
 
-    res.json({ message: 'Verification email sent', ticket: result.data });
+    res.json({ message: 'Verification email sent', ticket: result });
   } catch (err) {
     console.error('Verify email error:', err.message);
     res.status(err.statusCode || 500).json({ error: err.message });

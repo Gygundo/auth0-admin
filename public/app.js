@@ -127,8 +127,8 @@ function renderUserDetail(user, logs, blocks) {
   document.getElementById('userAppMeta').textContent = JSON.stringify(user.app_metadata || {}, null, 2);
   document.getElementById('userMeta').textContent = JSON.stringify(user.user_metadata || {}, null, 2);
 
-  // Unblock button visibility
-  document.getElementById('btnUnblock').style.display = isBlocked ? '' : 'none';
+  // Always show unblock — brute-force blocks may exist at IP/identifier level
+  // even when user profile doesn't show as blocked
 
   // Logs
   const logsArr = Array.isArray(logs) ? logs : [];

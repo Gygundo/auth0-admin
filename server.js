@@ -11,6 +11,9 @@ const ticketsRouter = require('./routes/tickets');
 const app = express();
 const PORT = process.env.PORT || 3847;
 
+// Trust Nginx reverse proxy (needed for secure cookies behind proxy)
+app.set('trust proxy', 1);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
